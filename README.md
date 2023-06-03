@@ -1,4 +1,4 @@
-# Jonas React template for quick project setup
+# Personal React template for quick project setup
 + Tailwind
 + React router dom
 + 2 example routes
