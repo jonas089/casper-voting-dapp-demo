@@ -1,3 +1,9 @@
+# Jonas React template for quick project setup
++ Tailwind
++ React router dom
++ 2 example routes
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
