@@ -9,7 +9,7 @@ const navigation = [
   { name: 'Company', href: '#' },
 ]
 
-export default function Example() {
+export default function Example2() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -135,8 +135,8 @@ export default function Example() {
               >
                 Get started
               </a>
-              <a href="example2" className="text-sm font-semibold leading-6 text-gray-900">
-                Navigate to Example2 <span aria-hidden="true">→</span>
+              <a href="/" className="text-sm font-semibold leading-6 text-gray-900">
+                Navigate to Example1 <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
