@@ -22,4 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-./casper/node_modules/
+casper/node_modules
+*/node_modules/
+*/node_modules
