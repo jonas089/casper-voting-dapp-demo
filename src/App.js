@@ -16,9 +16,11 @@ const Navbar = () => {
   );
 };
 
+/*
 const Home = () => <h2>Home</h2>;
 const About = () => <h2>About</h2>;
 const Contact = () => <h2>Contact</h2>;
+*/
 
 const App = () => {
   return (
