@@ -1,4 +1,5 @@
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react';
 
 const features = [
   {
@@ -20,6 +21,59 @@ const features = [
 ]
 
 export default function Example() {
+  // use hooks to connect plugin and check state
+  const [isConnected, setIsConnected] = useState(undefined);
+  const [activePublicKey, setActivePublicKey] = useState(undefined);
+  const [provider, setProvider] = useState(undefined);
+
+  useEffect(() => {
+    if (window.CasperWalletProvider) {
+      const CasperWalletProvider = window.CasperWalletProvider;
+      const provider = CasperWalletProvider();
+  
+      const checkConnection = async () => {
+        try {
+          const isConnected = await provider.isConnected();
+          console.log("Connection status: ", isConnected);
+          setIsConnected(isConnected);
+          setProvider(provider);
+        } catch (error) {
+          console.error("Plugin is locked!", error);
+        }
+      };
+  
+      checkConnection();
+    }
+  }, [window.CasperWalletProvider]);
+  
+  useEffect(() => {
+    if (isConnected == false){
+      console.log("Plugin not connected, connecting...");
+      provider.requestConnection();
+    }
+    else if (isConnected == true){
+      console.log("Plugin is connected.")
+    }
+    else{
+      console.log("Error: Invalid connection status");
+    }
+  }, [isConnected])
+
+  useEffect(() => {
+    if (isConnected == true){
+      const getPublicKey = async() => {
+        const _activePublicKey = await provider.getActivePublicKey();
+        await setActivePublicKey(_activePublicKey);
+      }
+      getPublicKey();
+    }
+  }, [isConnected])
+
+  useEffect(() => {
+    console.log("Active key: ", activePublicKey);
+  }, [activePublicKey])
+
+
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

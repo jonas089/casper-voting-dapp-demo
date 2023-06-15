@@ -37,3 +37,29 @@ async function call_contract(args, runtime_args){
     });
     return result;
 }
+
+
+/* Casper Wallet integration
+
+
+const CasperWalletProvider = window.CasperWalletProvider;
+const provider = CasperWalletProvider();
+provider
+  .sign(JSON.stringify(deployJson), accountPublicKey)
+  .then(res => {
+    if (res.cancelled) {
+      alert('Sign cancelled');
+    } else {
+      const signedDeploy = DeployUtil.setSignature(
+        deploy,
+        res.signature,
+        CLPublicKey.fromHex(accountPublicKey)
+      );
+      alert('Sign successful: ' + JSON.stringify(signedDeploy, null, 2));
+    }
+  })
+  .catch(err => {
+    alert('Error: ' + err);
+  });
+  
+*/
