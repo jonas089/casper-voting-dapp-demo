@@ -26,13 +26,13 @@ export default function Example() {
     <div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl pb-5">
+            <h1 className="text-4xl font-bold tracking-tight text-red-500 sm:text-6xl pb-5">
               C A S P E R
             </h1>
 
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Account:  {activePublicKey === undefined ? "undefined" : activePublicKey }
+                Account:  {activePublicKey === undefined ? "Not connected!" : activePublicKey }
               </div>
             </div>
 
@@ -50,6 +50,48 @@ export default function Example() {
             </div>
           </div>
         </div>
-    </div>
-  )
-}
+
+        <div className="relative bg-gray-800 px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
+          <div className="absolute inset-0 overflow-hidden">
+            <img
+              src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F02%2Fblockchain-scaling.jpg&w=1920&q=75"
+              alt=""
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <div aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50" />
+          <div className="relative bg-gray-800 px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
+          
+          <div className="absolute inset-0 overflow-hidden">
+            <img
+              src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F02%2Fblockchain-scaling.jpg&w=1920&q=75"
+              alt=""
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <div aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50" />
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Blockchain Voting</h2>
+              <p className="mt-3 py-5 text-xl text-white">
+                Please choose an option
+              </p>
+
+              <div className="flex justify-center space-x-10">
+                <button
+                  onClick={fnConnect}
+                  className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Option 1
+                </button>
+                <button
+                  onClick={fnConnect}
+                  className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Option 2
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+)}

@@ -32,13 +32,13 @@ export default function Example() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    className="block h-10 w-auto lg:hidden"
+                    src="https://tokensinvaders.com/wp-content/uploads/2020/07/casper-crypto.png"
                     alt="Your Company"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    className="hidden h-10 w-auto lg:block"
+                    src="https://tokensinvaders.com/wp-content/uploads/2020/07/casper-crypto.png"
                     alt="Your Company"
                   />
                 </div>
