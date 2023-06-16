@@ -44,7 +44,7 @@ const useWallet = () => {
       }
       const handleDisconnected = (event) => {
         try{
-          setActivePublicKey('');
+          setActivePublicKey(undefined);
           setIsConnected(false);
         } catch (err) {
           console.log(err);
