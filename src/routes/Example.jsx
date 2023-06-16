@@ -23,59 +23,122 @@ const features = [
 export default function Example() {
   // use hooks to connect plugin and check state
   const [isConnected, setIsConnected] = useState(undefined);
+  const [isLocked, setIsLocked] = useState(undefined);
   const [activePublicKey, setActivePublicKey] = useState(undefined);
-  const [provider, setProvider] = useState(undefined);
 
+  // check connection on provider change
   useEffect(() => {
     if (window.CasperWalletProvider) {
-      const CasperWalletProvider = window.CasperWalletProvider;
-      const provider = CasperWalletProvider();
-  
+      const provider = window.CasperWalletProvider();
       const checkConnection = async () => {
         try {
           const isConnected = await provider.isConnected();
-          console.log("Connection status: ", isConnected);
           setIsConnected(isConnected);
-          setProvider(provider);
         } catch (error) {
-          console.error("Plugin is locked!", error);
+          setIsLocked(true);
         }
       };
-  
       checkConnection();
     }
   }, [window.CasperWalletProvider]);
-  
-  useEffect(() => {
-    if (isConnected == false){
-      console.log("Plugin not connected, connecting...");
-      provider.requestConnection();
-    }
-    else if (isConnected == true){
-      console.log("Plugin is connected.")
-    }
-    else{
-      console.log("Error: Invalid connection status");
-    }
-  }, [isConnected])
 
+  // monitor and handle events
   useEffect(() => {
-    if (isConnected == true){
-      const getPublicKey = async() => {
-        const _activePublicKey = await provider.getActivePublicKey();
-        await setActivePublicKey(_activePublicKey);
+    if (window.CasperWalletEventTypes){
+      const handleConnected = (event) => {
+        try {
+          const state = JSON.parse(event.detail);
+          if (state.activeKey) {
+            setActivePublicKey(state.activeKey);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
-      getPublicKey();
+      const handleDisconnected = (event) => {
+        try{
+          setActivePublicKey('');
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      const handleLocked = (event) => {
+        try {
+          const state = JSON.parse(event.detail);
+          setIsLocked(true);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      const handleUnlocked = (event) => {
+        try {
+          const state = JSON.parse(event.detail);
+          setIsConnected(state.isConnected);
+          setIsLocked(false);
+          console.log("Connection as per Unlock event: ", state.isConnected);
+        } catch (err) {
+          console.log(err);
+        } 
+      }
+      window.addEventListener(window.CasperWalletEventTypes.Connected, handleConnected);
+      window.addEventListener(window.CasperWalletEventTypes.Disconnected, handleDisconnected);
+      window.addEventListener(window.CasperWalletEventTypes.Locked, handleLocked);
+      window.addEventListener(window.CasperWalletEventTypes.Unlocked, handleUnlocked);
+      return () => {
+        window.removeEventListener(
+          window.CasperWalletEventTypes.Connected,
+          handleConnected
+        );
+        window.removeEventListener(
+          window.CasperWalletEventTypes.Locked,
+          handleLocked
+        );
+      };
     }
-  }, [isConnected])
+  }, [window.CasperWalletEventTypes])
 
   useEffect(() => {
     console.log("Active key: ", activePublicKey);
   }, [activePublicKey])
 
+  useEffect(() => {
+    if (window.CasperWalletProvider){
+      const provider = window.CasperWalletProvider();
+      if (isConnected == false){
+        provider.requestConnection();
+      }
+      else if (isConnected == true && isLocked != true){
+        async function getPublicKey(){
+          const publicKey = await provider.getActivePublicKey();
+          setActivePublicKey(publicKey);
+        }
+        getPublicKey();
+      }
+    }
+    console.log("Connection status: ", isConnected);
+  }, [isConnected])
+
+  useEffect(() => {
+    if (window.CasperWalletProvider && isLocked == false){
+      const provider = window.CasperWalletProvider();
+      if (isConnected == false){
+        provider.requestConnection();
+      }
+      else{
+        // wallet is connected and just got unlocked => when the page was visited the wallet was locked
+        async function getPublicKey(){
+          const publicKey = await provider.getActivePublicKey();
+          setActivePublicKey(publicKey);
+        }
+        getPublicKey();
+      }
+    }
+    console.log("Is Locked: ", isLocked);
+  }, [isLocked])
 
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
+      <h1>Active Public Key: {activePublicKey}</h1>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
