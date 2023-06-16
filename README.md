@@ -9,3 +9,10 @@
 2. Server,- client (axios, node.js) samples
 
 3. Tailwind components support & latest react syntax support
+
+
+'''
+npm install
+npm start
+
+'''
