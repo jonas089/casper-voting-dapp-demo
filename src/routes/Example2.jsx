@@ -1,6 +1,9 @@
 import React from 'react';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid';
 
+// this is just a blank example of a class component - I currently prefer functional components.
+
+
 const features = [
   {
     name: 'Push to deploy.',

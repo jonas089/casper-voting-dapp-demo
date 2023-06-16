@@ -21,9 +21,10 @@ const features = [
 ]
 
 export default function Example() {
-  const { isConnected, provider, activePublicKey, isLocked } = useWallet();
+  const { isConnected, provider, activePublicKey, isLocked, fnConnect } = useWallet();
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
+      <button onClick={fnConnect}>Connect</button>
       <h1>Active Public Key: {activePublicKey}</h1>
       <h1>Connected: {isConnected !== undefined ? isConnected.toString() : "undefined"}</h1>
       <h1>Lock: {isLocked !== undefined ? isLocked.toString() : "undefined"}</h1>

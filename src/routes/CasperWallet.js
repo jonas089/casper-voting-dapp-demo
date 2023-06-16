@@ -4,7 +4,13 @@ const useWallet = () => {
   const [isConnected, setIsConnected] = useState(undefined);
   const [isLocked, setIsLocked] = useState(undefined);
   const [activePublicKey, setActivePublicKey] = useState(undefined);
+
   const [provider, setProvider] = useState(undefined);
+
+  // connect button calls this
+  async function fnConnect(){
+    await provider.requestConnection().then(() => {setIsConnected(true)});
+  }
 
   // check connection on provider change
   useEffect(() => {
@@ -79,10 +85,12 @@ const useWallet = () => {
     }
   }, [window.CasperWalletEventTypes])
 
+  // always console.log the new key on change
   useEffect(() => {
     console.log("Active key: ", activePublicKey);
   }, [activePublicKey])
 
+  // handle change of connection status - try to reconnect
   useEffect(() => {
     if (window.CasperWalletProvider){
       const provider = window.CasperWalletProvider();
@@ -100,6 +108,7 @@ const useWallet = () => {
     console.log("Connection status: ", isConnected);
   }, [isConnected])
 
+  
   useEffect(() => {
     if (window.CasperWalletProvider && isLocked == false){
       const provider = window.CasperWalletProvider();
@@ -107,7 +116,6 @@ const useWallet = () => {
         provider.requestConnection();
       }
       else{
-        // wallet is connected and just got unlocked => when the page was visited the wallet was locked
         async function getPublicKey(){
           const publicKey = await provider.getActivePublicKey();
           setActivePublicKey(publicKey);
@@ -118,7 +126,7 @@ const useWallet = () => {
     console.log("Is Locked: ", isLocked);
   }, [isLocked])
 
-  return { isConnected, activePublicKey, isLocked, provider };
+  return { isConnected, activePublicKey, isLocked, provider, fnConnect };
 };
 
 export default useWallet;
