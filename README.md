@@ -11,8 +11,7 @@
 3. Tailwind components support & latest react syntax support
 
 
-'''
+```
 npm install
 npm start
-
-'''
+```
