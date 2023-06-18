@@ -1,5 +1,5 @@
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-import useWallet from './CasperWallet';
+import useWallet from '../service/CasperWallet';
 
 const features = [
   {
