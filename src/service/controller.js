@@ -1,15 +1,15 @@
 import axios from 'axios';
 import {RuntimeArgs, CLValueBuilder, Contracts, CasperClient, DeployUtil, CLPublicKey} from 'casper-js-sdk';
-
+import { nodeAddress, contractAddress } from './constants';
 async function vote(activePublicKey, provider){
     const args = RuntimeArgs.fromMap({
         'choice': CLValueBuilder.string("choice_a")
     });
     const clPublicKey = CLPublicKey.fromHex(activePublicKey);
-    const client = await new CasperClient("http://");
+    const client = await new CasperClient(nodeAddress);
     const contract = new Contracts.Contract(client);
-    contract.setContractHash("hash-");
-    const deploy = contract.callEntryPoint("vote", args, clPublicKey, "casper-test", "100000000000", [], 10000000);
+    contract.setContractHash(contractAddress);
+    const deploy = contract.callEntrypoint("vote", args, clPublicKey, "casper-test", "100000000000", [], 10000000);
     const deployJson = DeployUtil.deployToJson(deploy);
     provider
     .sign(JSON.stringify(deployJson), activePublicKey)
@@ -42,7 +42,7 @@ async function sendSignedDeploy(signedJson){
         "signedJson": signedJson,
       }
       let res = await axios.post(
-        "http://" + "/send",
+        nodeAddress + "/send",
         data,
         {headers: {'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'}})

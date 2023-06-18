@@ -32,10 +32,10 @@ export default function Example() {
               C A S P E R
             </h1>
 
-            <div className="mb-8 flex justify-center">
-              <div className="relative rounded-full px-3 py-1 text-sm sm:text-base lg:text-lg leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Account: {activePublicKey === undefined ? "Not connected!" : activePublicKey}
-              </div>
+            <div className="mb-8 whitespace-normal break-all">
+                <div className="relative rounded-full px-3 py-1 text-sm sm:text-base lg:text-lg leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                  Account: {activePublicKey === undefined ? "Not connected!" : activePublicKey}
+                </div>
             </div>
 
             <p className="mt-6 text-lg leading-8 text-gray-600">
