@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-import useWallet from '../service/CasperWallet';
-
+import { useWallet } from '../service/CasperWallet';
+import { vote } from '../service/controller';
 const features = [
   {
     name: 'Push to deploy.',
@@ -20,6 +21,7 @@ const features = [
   },
 ]
 
+
 export default function Example() {
   const { isConnected, provider, activePublicKey, isLocked, fnConnect } = useWallet();
   return (
@@ -30,9 +32,9 @@ export default function Example() {
               C A S P E R
             </h1>
 
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-              <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Account:  {activePublicKey === undefined ? "Not connected!" : activePublicKey }
+            <div className="mb-8 flex justify-center">
+              <div className="relative rounded-full px-3 py-1 text-sm sm:text-base lg:text-lg leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                Account: {activePublicKey === undefined ? "Not connected!" : activePublicKey}
               </div>
             </div>
 
@@ -77,7 +79,7 @@ export default function Example() {
 
               <div className="flex justify-center space-x-10">
                 <button
-                  onClick={fnConnect}
+                  onClick={() => {vote(activePublicKey, provider)}}
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Option 1
@@ -86,7 +88,7 @@ export default function Example() {
                   onClick={fnConnect}
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  Option 2
+                  Option 1
                 </button>
               </div>
             </div>
@@ -94,3 +96,4 @@ export default function Example() {
         </div>
       </div>
 )}
+//onClick={() => vote(activePublicKey, provider)}

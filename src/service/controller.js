@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {RuntimeArgs, CLValueBuilder, Contracts, CasperClient, DeployUtil, CLPublicKey} from 'casper-js-sdk';
-import {provider} from './CasperWallet';
-async function vote(choice, activePublicKey){
+
+async function vote(activePublicKey, provider){
     const args = RuntimeArgs.fromMap({
-        'choice': CLValueBuilder.string(choice)
+        'choice': CLValueBuilder.string("choice_a")
     });
     const clPublicKey = CLPublicKey.fromHex(activePublicKey);
     const client = await new CasperClient("http://");
@@ -11,7 +11,6 @@ async function vote(choice, activePublicKey){
     contract.setContractHash("hash-");
     const deploy = contract.callEntryPoint("vote", args, clPublicKey, "casper-test", "100000000000", [], 10000000);
     const deployJson = DeployUtil.deployToJson(deploy);
-
     provider
     .sign(JSON.stringify(deployJson), activePublicKey)
     .then(res => {
@@ -42,8 +41,8 @@ async function sendSignedDeploy(signedJson){
       const data = {
         "signedJson": signedJson,
       }
-      res = await axios.post(
-        base_url + "/send",
+      let res = await axios.post(
+        "http://" + "/send",
         data,
         {headers: {'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'}})
@@ -61,6 +60,8 @@ async function sendSignedDeploy(signedJson){
     }
     catch(error){
       console.log("Axios Error: ", error);
-      return error
+      return error;
     }
 }
+
+export{vote};

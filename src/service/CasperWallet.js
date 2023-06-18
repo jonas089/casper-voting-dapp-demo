@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-const useWallet = () => {
+export const useWallet = () => {
   const [isConnected, setIsConnected] = useState(undefined);
   const [isLocked, setIsLocked] = useState(undefined);
   const [activePublicKey, setActivePublicKey] = useState(undefined);
-
   const [provider, setProvider] = useState(undefined);
 
   // connect button calls this
