@@ -10,7 +10,7 @@ async function vote(activePublicKey, provider, choice_value){
     const client = await new CasperClient(nodeAddress);
     const contract = new Contracts.Contract(client);
     contract.setContractHash(contractAddress);
-    const deploy = contract.callEntrypoint("vote", args, clPublicKey, "casper-test", "100000000000", [], 10000000);
+    const deploy = contract.callEntrypoint("vote", args, clPublicKey, "casper-test", "10000000000", [], 10000000);
     const deployJson = DeployUtil.deployToJson(deploy);
     provider
     .sign(JSON.stringify(deployJson), activePublicKey)
@@ -26,6 +26,7 @@ async function vote(activePublicKey, provider, choice_value){
         //alert('Sign successful: ' + JSON.stringify(signedDeploy, null, 2));
         sendSignedDeploy(DeployUtil.deployToJson(signedDeploy)).then((result) => {
             console.log("Deploy result: ", result);
+            alert('Deploy hash: ' + result);
         })
         .catch((error) => {
             console.log("Deploy Error: ", error);

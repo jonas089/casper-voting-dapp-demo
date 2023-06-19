@@ -77,8 +77,16 @@ export const useWallet = () => {
           handleConnected
         );
         window.removeEventListener(
+          window.CasperWalletEventTypes.Disconnected,
+          handleDisconnected
+        );
+        window.removeEventListener(
           window.CasperWalletEventTypes.Locked,
           handleLocked
+        );
+        window.removeEventListener(
+          window.CasperWalletEventTypes.Unlocked,
+          handleUnlocked
         );
       };
     }
