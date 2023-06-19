@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 import http from 'http';
 import pkg from 'casper-js-sdk';
@@ -7,6 +7,8 @@ const {Contracts, CasperClient, DeployUtil} = pkg;
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const nodeAddress = "http://195.201.167.179:7777/rpc/"
 
 async function Server(){
     const app = express();
@@ -18,21 +20,21 @@ async function Server(){
 
     app.post('/send', async(req, res) => {
         try{
-            const nodeAddress = "http://";
             const signedJson = req.body.signedJson;
             let signedDeploy = DeployUtil.deployFromJson(signedJson).unwrap();
-            signedDeploy.send(nodeAddress).then((response) => {
+            await signedDeploy.send(nodeAddress).then((response) => {
+                console.log("Signed Deploy: ", signedDeploy);
+                console.log("Node response: ", response);
                 res.send(response);
-                return;
             })
             .catch((error) => {
+                console.log("Error in send: ", error);
                 res.send(error);
-                return;
             })
         }
         catch(error){
             console.log("Server Error: ", error);
-            return;
+            res.send(error);
         }
     });
 }

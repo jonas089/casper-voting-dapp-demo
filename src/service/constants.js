@@ -1,4 +1,4 @@
-const nodeAddress = "http://65.109.17.120:7777";
-const contractAddress = "hash-99baafab995cab68ca622edcb29fee7b83e1245ac0a3218444e996f561cba8f9";
+const nodeAddress = "http://195.201.167.179:7777/rpc/"
+const contractAddress = "hash-";
 
 export{nodeAddress, contractAddress};
