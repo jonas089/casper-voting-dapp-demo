@@ -3,17 +3,19 @@
 #[cfg(not(target_arch = "wasm32"))]
 compile_error!("target arch should be wasm32: compile with '--target wasm32-unknown-unknown'");
 extern crate alloc;
-use alloc::string::String;
+use alloc::{
+    string::{String, ToString},
+    vec,
+    vec::Vec,
+};
 use casper_contract::{
     contract_api::{runtime, storage},
     unwrap_or_revert::UnwrapOrRevert,
 };
-use casper_types::{contracts::NamedKeys, ApiError, Key, URef, EntryPoints, EntryPoint, Parameter, RuntimeArgs, EntryPointAccess, EntryPointType, U256};
-
-const VOTES_DICT_NAME = "votes";
-const CHOICE_A = "choice_A";
-const CHOICE_B = "choice_B";
-
+use casper_types::{contracts::NamedKeys, ApiError, Key, URef, EntryPoints, EntryPoint, Parameter, RuntimeArgs, EntryPointAccess, EntryPointType, U256, CLType};
+const VOTES_DICT_NAME: &str = "votes";
+const CHOICE_A: &str = "choice_A";
+const CHOICE_B: &str = "choice_B";
 #[no_mangle]
 pub extern "C" fn vote(){
     let choice: String = runtime::get_named_arg("choice");
@@ -27,12 +29,12 @@ pub extern "C" fn vote(){
     }.into_uref().unwrap_or_revert();
 
     if choice == CHOICE_A{
-        let mut A_votes: U256 = storage::read_or_revert(CHOICE_A);
+        let mut A_votes: U256 = storage::read_or_revert(A_uref);
         A_votes += U256::from(1);
         storage::write(A_uref, A_votes);
     }
     else if choice == CHOICE_B{
-        let mut B_votes: U256 = storage::read_or_revert(CHOICE_B);
+        let mut B_votes: U256 = storage::read_or_revert(B_uref);
         B_votes += U256::from(1);
         storage::write(B_uref, B_votes)
     }
@@ -40,7 +42,6 @@ pub extern "C" fn vote(){
         runtime::revert(ApiError::Unhandled)
     }
 }
-
 #[no_mangle]
 pub extern "C" fn call() {
     let mut entry_points = EntryPoints::new();
@@ -73,8 +74,8 @@ pub extern "C" fn call() {
         // For now - 2 simple options
         let A_uref = storage::new_uref(CHOICE_A);
         let B_uref = storage::new_uref(CHOICE_B);
-        named_keys.insert(CHOICE_A.to_string(), A_uref);
-        named_keys.insert(CHOICE_B.to_string(), B_uref);
+        named_keys.insert(CHOICE_A.to_string(), A_uref.into());
+        named_keys.insert(CHOICE_B.to_string(), B_uref.into());
         storage::write(A_uref, U256::from(0));
         storage::write(B_uref, U256::from(0));
         named_keys
