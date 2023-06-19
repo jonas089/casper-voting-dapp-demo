@@ -79,13 +79,13 @@ export default function Example() {
 
               <div className="flex justify-center space-x-10">
                 <button
-                  onClick={() => {vote(activePublicKey, provider)}}
+                  onClick={() => {vote(activePublicKey, provider, "choice_A")}}
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Option 1
                 </button>
                 <button
-                  onClick={fnConnect}
+                  onClick={() => vote(activePublicKey, provider, "choice_B")}
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Option 1

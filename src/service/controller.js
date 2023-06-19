@@ -2,9 +2,9 @@ import axios from 'axios';
 import { RuntimeArgs, CLValueBuilder, Contracts, CasperClient, DeployUtil, CLPublicKey } from 'casper-js-sdk';
 import { nodeAddress, contractAddress } from './constants/constants';
 
-async function vote(activePublicKey, provider){
+async function vote(activePublicKey, provider, choice_value){
     const args = RuntimeArgs.fromMap({
-        'choice': CLValueBuilder.string("choice_a")
+        'choice': CLValueBuilder.string(choice_value)
     });
     const clPublicKey = CLPublicKey.fromHex(activePublicKey);
     const client = await new CasperClient(nodeAddress);
