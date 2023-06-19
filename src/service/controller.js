@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { RuntimeArgs, CLValueBuilder, Contracts, CasperClient, DeployUtil, CLPublicKey } from 'casper-js-sdk';
-import { nodeAddress, contractAddress } from './constants';
+import { nodeAddress, contractAddress } from './constants/constants';
+
 async function vote(activePublicKey, provider){
     const args = RuntimeArgs.fromMap({
         'choice': CLValueBuilder.string("choice_a")
