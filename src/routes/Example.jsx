@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 import { useWallet } from '../service/CasperWallet';
-import { vote } from '../service/controller';
+import { vote, getVotes } from '../service/controller';
 const features = [
   {
     name: 'Push to deploy.',
@@ -24,6 +24,13 @@ const features = [
 
 export default function Example() {
   const { isConnected, provider, activePublicKey, isLocked, fnConnect } = useWallet();
+  const [ votesA, setVotesA] = useState(0);
+  const [ votesB, setVotesB] = useState(0);
+  const options = [
+    {id: 1, text: "Option A", votes : parseInt(votesA, 16)},
+    {id: 2, text: "Option B", votes: parseInt(votesB, 16)}
+  ];
+  const totalVotes = parseInt(votesA, 16) + parseInt(votesB, 16);
   return (
     <div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
@@ -55,7 +62,7 @@ export default function Example() {
         <div className="relative bg-gray-800 px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F02%2Fblockchain-scaling.jpg&w=1920&q=75"
+              src="https://wallpapers.com/images/featured-full/minimalist-7xpryajznty61ra3.jpg"
               alt=""
               className="h-full w-full object-cover object-center"
             />
@@ -65,17 +72,14 @@ export default function Example() {
           
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F02%2Fblockchain-scaling.jpg&w=1920&q=75"
+              src="https://wallpapers.com/images/featured-full/minimalist-7xpryajznty61ra3.jpg"
               alt=""
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50" />
             <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Blockchain Voting</h2>
-              <p className="mt-3 py-5 text-xl text-white">
-                Please choose an option
-              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl pb-10">Blockchain Voting</h2>
 
               <div className="flex justify-center space-x-10">
                 <button
@@ -90,7 +94,37 @@ export default function Example() {
                 >
                   Choice "B"
                 </button>
+                <button
+                  onClick={() => getVotes(setVotesA, setVotesB)}
+                  className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Update
+                </button>
               </div>
+              <div className='pt-10'>
+                <div className="bg-white rounded shadow p-4 w-80">
+                  {options.map((option) => (
+                    <div key={option.id} className="mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-lg">{option.text}</span>
+                        <span className="text-gray-500 text-sm">
+                          {((option.votes / totalVotes) * 100).toFixed(2)}%
+                        </span>
+                      </div>
+                      <div className="h-2 bg-gray-200 rounded-full">
+                        <div
+                          className="h-full bg-blue-500 rounded-full"
+                          style={{ width: `${(option.votes / totalVotes) * 100}%` }}
+                        />
+                      </div>
+                      <div className="text-gray-500 text-xs mt-1">
+                        {option.votes} vote{option.votes !== 1 ? 's' : ''}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ const {Contracts, CasperClient, DeployUtil} = pkg;
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import { nodeAddress } from '../src/service/constants/constants.js';
+import { nodeAddress, contractAddress } from '../src/service/constants/constants.js';
 
 async function Server(){
     const app = express();
@@ -29,6 +29,20 @@ async function Server(){
                 console.log("Error in send: ", error);
                 res.send(error);
             })
+        }
+        catch(error){
+            console.log("Server Error: ", error);
+            res.send(error);
+        }
+    });
+    app.get('/votes', async(req, res) => {
+        try{
+            const client = await new CasperClient(nodeAddress);
+            const contract = new Contracts.Contract(client);
+            contract.setContractHash(contractAddress);
+            const votes_A = await contract.queryContractData(['choice_A']);
+            const votes_B = await contract.queryContractData(['choice_B']);
+            res.send ([votes_A, votes_B]);
         }
         catch(error){
             console.log("Server Error: ", error);
