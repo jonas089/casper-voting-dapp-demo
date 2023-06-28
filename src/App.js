@@ -24,5 +24,13 @@ const App = () => {
     </Routes>
   );
 };
+/*
+    <Routes>
+      <Route path="/" element={<Navbar />}>
+        <Route index element={<Example />} />
+        <Route path="example2" element={<Example2 />} />
+      </Route>
+    </Routes>
+*/
 
 export default App;
