@@ -31,6 +31,9 @@ export default function Example() {
     {id: 2, text: "Option B", votes: parseInt(votesB, 16)}
   ];
   const totalVotes = parseInt(votesA, 16) + parseInt(votesB, 16);
+  useEffect(() => {
+    getVotes(setVotesA, setVotesB);
+  }, [])
   return (
     <div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
