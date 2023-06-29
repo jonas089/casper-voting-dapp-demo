@@ -6,14 +6,6 @@ The `server` folder contains a node.js backend to deploy and query a Casper netw
 
 Additionally, Tailwind is imported and components can be used out of the box. A Tailwind Navbar can be found in `components` and routes can easily be added.
 
-## Preview
-![Casper Wallet](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-full-1.png)
-
-![Voting Dapp](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-full-2.png)
-
-![NavBar](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-sm.png)
-
-
 ```
  ██████╗ █████╗ ███████╗██████╗ ███████╗██████╗     ██╗  ██╗    ██████╗ ███████╗ █████╗  ██████╗████████╗ 
 ██╔════╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    ╚██╗██╔╝    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝   
@@ -31,4 +23,15 @@ cd server && npm install
 ```
 
 -> navigate to localhost:3000
+
+## Preview
+1. Casper Wallet
+![Casper Wallet](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-full-1.png)
+
+2. Voting
+![Voting Dapp](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-full-2.png)
+
+3. Tailwind & Navbar
+![NavBar](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/github-resources/desktop-sm.png)
+
 
