@@ -19,8 +19,10 @@ const Navbar = () => {
 const App = () => {
   return (
     <Routes>
-      <Route index element={<Example />} />
-      <Route path="example2" element={<Example2 />} />
+      <Route path="/" element={<Navbar />}>
+        <Route index element={<Example />} />
+        <Route path="example2" element={<Example2 />} />
+      </Route>
     </Routes>
   );
 };

@@ -16,6 +16,7 @@ use casper_types::{contracts::NamedKeys, ApiError, Key, URef, EntryPoints, Entry
 const VOTES_DICT_NAME: &str = "votes";
 const CHOICE_A: &str = "choice_A";
 const CHOICE_B: &str = "choice_B";
+
 #[no_mangle]
 pub extern "C" fn vote(){
     let choice: String = runtime::get_named_arg("choice");
@@ -42,6 +43,7 @@ pub extern "C" fn vote(){
         runtime::revert(ApiError::Unhandled)
     }
 }
+
 #[no_mangle]
 pub extern "C" fn call() {
     let mut entry_points = EntryPoints::new();
