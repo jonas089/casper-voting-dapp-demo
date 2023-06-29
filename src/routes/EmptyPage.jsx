@@ -1,7 +1,9 @@
 import React from 'react';
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid';
 
-class Example2 extends React.Component {
+// This page only exists to showcase the Navbar
+
+class EmptyPage extends React.Component {
   render() {
     return (
       <div className="overflow-hidden bg-white py-24 sm:py-32">
@@ -11,4 +13,4 @@ class Example2 extends React.Component {
   }
 }
 
-export default Example2;
+export default EmptyPage;

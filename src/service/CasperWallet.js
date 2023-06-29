@@ -67,6 +67,7 @@ export const useWallet = () => {
           console.log(err);
         } 
       }
+      // add and clear event listeners
       window.addEventListener(window.CasperWalletEventTypes.Connected, handleConnected);
       window.addEventListener(window.CasperWalletEventTypes.Disconnected, handleDisconnected);
       window.addEventListener(window.CasperWalletEventTypes.Locked, handleLocked);

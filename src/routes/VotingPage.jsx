@@ -3,7 +3,7 @@ import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/2
 import { useWallet } from '../service/CasperWallet';
 import { vote, getVotes } from '../service/controller';
 
-export default function Example() {
+export default function VotingPage() {
   const { isConnected, provider, activePublicKey, isLocked, fnConnect } = useWallet();
   const [ votesA, setVotesA] = useState(0);
   const [ votesB, setVotesB] = useState(0);

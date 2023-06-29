@@ -23,7 +23,6 @@ async function vote(activePublicKey, provider, choice_value){
           res.signature,
           clPublicKey
         );
-        //alert('Sign successful: ' + JSON.stringify(signedDeploy, null, 2));
         sendSignedDeploy(DeployUtil.deployToJson(signedDeploy)).then((result) => {
             console.log("Deploy result: ", result);
             alert('Deploy hash: ' + result);

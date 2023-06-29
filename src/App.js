@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import NavBar from "./components/Nav";
-import Example from "./routes/Example";
-import Example2 from "./routes/Example2";
+import EmptyPage from "./routes/EmptyPage";
+import VotingPage from "./routes/VotingPage";
 import "./index.css";
 
 const Navbar = () => {
@@ -20,8 +20,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navbar />}>
-        <Route index element={<Example />} />
-        <Route path="example2" element={<Example2 />} />
+        <Route index element={<VotingPage />} />
+        <Route path="example2" element={<EmptyPage />} />
       </Route>
     </Routes>
   );
