@@ -1,5 +1,5 @@
 # Voting Dapp built on Casper - a reusable React template
-This template is a great starting point for Dapp development on Casper using the React framework with functional components.
+Proof of concept voting Dapp built on Casper.
 
 ## Live Demo
 ![demo](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/demo.gif)
