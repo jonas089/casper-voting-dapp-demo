@@ -11,9 +11,7 @@ The main objective was to successfully integrate with the Casper Wallet Chrome e
 ## Setup
 The `server` folder contains a node.js backend to deploy and query a Casper network and the `service` folder houses a component to interact with and monitor the state of the Casper Wallet plugin. The `controller` constructs and forwards deploys and queries to the backend `server`.
 
-Additionally, Tailwind is imported and components can be used out of the box. A Tailwind Navbar can be found in `components` and routes can easily be added.
-
-**Requirement: Casper Wallet chrome plugin & funded Casper account**
+**Prerequisite: Casper Wallet chrome plugin & funded Casper account**
 
 ## Host this Dapp locally
 ```
@@ -21,7 +19,6 @@ npm install
 cd server && npm install
 ./start_local.sh
 ```
-
--> navigate to localhost:3000
+-> starts the app on localhost:3000
 
 
