@@ -1,5 +1,6 @@
 # Voting Dapp built on Casper - a reusable React template
-Proof of concept voting Dapp built on Casper.
+This React application is a simple voting app build on Casper. The Casper Wallet plugin is used to sign a transaction where the choice is either Option "A" or Option "B".
+The main objective was to successfully integrate with the Casper Wallet Chrome extension and to respond to its event-stream in real time. This voting app does not involve any Identity verification (other than Signatures).
 
 ## Live Demo
 ![demo](https://github.com/jonas089/casper-voting-dapp-and-template/blob/master/demo.gif)
